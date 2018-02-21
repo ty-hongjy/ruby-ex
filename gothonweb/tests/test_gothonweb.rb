@@ -1,12 +1,13 @@
 require "./bin/app.rb"
 require "test/unit"
 require "rack/test"
+require "sinatra"
 
 class Test_gothonweb < Test::Unit::TestCase
 	include Rack::Test::Methods
 
 	def app
-		sinatra::Application
+		Sinatra::Application
 	end
 
 	def test_my_default
