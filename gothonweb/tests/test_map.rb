@@ -2,47 +2,47 @@
 require "gothonweb/map.rb"
 require "test/unit"
 
-class TestGame < Test::Unit::TestCase
-	def test_room()
-		gold = Room.new("GoldRoom",
-				"""This room has gold in it yo can grab.There's a door to the north.""")
+# class TestGame < Test::Unit::TestCase
+# 	def test_room()
+# 		gold = Room.new("GoldRoom",
+# 				"""This room has gold in it yo can grab.There's a door to the north.""")
 
-		assert_equal(gold.name,"GoldRoom")
-		assert_equal(gold.paths,{})
-#		assert_equal(gold.paths,nil)
+# 		assert_equal(gold.name,"GoldRoom")
+# 		assert_equal(gold.paths,{})
+# #		assert_equal(gold.paths,nil)
 
-	end
+# 	end
 
-	def test_room_paths()
-		center = Room.new("Center","Test room in the center.")
-		north = Room.new("North","Test room in the north.")
-		south = Room.new("South","Test room in the south.")
+# 	def test_room_paths()
+# 		center = Room.new("Center","Test room in the center.")
+# 		north = Room.new("North","Test room in the north.")
+# 		south = Room.new("South","Test room in the south.")
 
-		center.add_paths({'north'=>north,'south'=>south})
+# 		center.add_paths({'north'=>north,'south'=>south})
 		
-		assert_equal(center.go('north'),north)
-		assert_equal(center.go('south'),south)
+# 		assert_equal(center.go('north'),north)
+# 		assert_equal(center.go('south'),south)
 
-	end
+# 	end
 
-	def test_map()
-		start = Room.new("Start","You can go west and down a hole")
-		west = Room.new("Three","There are trees here,you can go east")
-		down = Room.new("Dungeon","It's dark down here,you can go up")
+# 	def test_map()
+# 		start = Room.new("Start","You can go west and down a hole")
+# 		west = Room.new("Three","There are trees here,you can go east")
+# 		down = Room.new("Dungeon","It's dark down here,you can go up")
 
-		start.add_paths({'west'=>west,'down'=>down})
-		west.add_paths({'east'=>start})
-		down.add_paths({'up'=>start})
+# 		start.add_paths({'west'=>west,'down'=>down})
+# 		west.add_paths({'east'=>start})
+# 		down.add_paths({'up'=>start})
 
-		assert_equal(start.go('west'),west)
-		assert_equal(start.go('west').go('east'),start)
-		assert_equal(start.go('down').go('up'),start)
-	end
-end
+# 		assert_equal(start.go('west'),west)
+# 		assert_equal(start.go('west').go('east'),start)
+# 		assert_equal(start.go('down').go('up'),start)
+# 	end
+# end
 
 class TestMap< Test::Unit::TestCase
 	def test_room()
-		go1d=Map::Room.new("GoldMap::Room",
+		gold=Map::Room.new("GoldMap::Room",
 		"""This room has gold in it you can grab.There's a
 		door to the north.""")
 		assert_equal(gold.name,"GoldMap::Room")
@@ -60,7 +60,7 @@ class TestMap< Test::Unit::TestCase
 	end
 
 	def test_map()
-		stact=Map::Room.new("Start","you can go west and down a hole.")
+		start=Map::Room.new("Start","you can go west and down a hole.")
 		west=Map::Room.new("Trees","There are trees here,you can go east.")
 		down=Map::Room.new("Dungeon","It's dark down here,you can go up.")
 
@@ -70,18 +70,18 @@ class TestMap< Test::Unit::TestCase
 
 		assert_equal(start.go('west'),west)
 		assert_equal(start.go('west').go('east'),start)
-		assert.eq1a1(Start.go('down').go('up'),start)
+		assert_equal(start.go('down').go('up'),start)
 	end
 
 	def test_gothon_game_map()
 		assert_equal(Map::START.go('shoot!'),Map::GENERIC_DEATH)
-		assert_equal(Map::SPART.go('dodege'),Map::GENERIC_DEATH)
+		assert_equal(Map::START.go('dodge!'),Map::GENERIC_DEATH)
 		room=Map::START.go('tell a joke')
 		assert_equal(room,Map::LASER_WEAPON_ARMORY)
 		#complete this test by making it play the game
 	end
 
-	def test_session_1oading()
+	def test_session_loading()
 		session={}
 		room=Map::load_room(session)
 		assert_equal(room,nil)
