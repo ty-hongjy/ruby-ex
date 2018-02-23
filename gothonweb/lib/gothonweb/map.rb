@@ -23,13 +23,17 @@ module Map
 
 	CENTRAL_CORRIDOR= Room.new("Central Corridor",
 	"""
-		The Gothons of Planet Percal :25 have invaded your ship and destroyedyour entire crew. You are the last surviving member and your lastmission is to get the neutron destruct bomb from the Weapons Armory,put it in the bridge, and blow the ship up after getting into
-	escape pod.
+		The Gothons of Planet Percal :25 have invaded your ship and destroyedyour entire crew. 
+		You are the last surviving member and your last mission is to get the
+		 neutron destruct bomb from the Weapons Armory,put it in the bridge, and blow the ship up
+		  after getting into escape pod.
 
-		you're running down the central corridor to the Weapons Armory whena Othon Jumps out, red scaly skin, dark grimy teeth, and evil clown costuflowing around his hate filled body. he's blocking the door to theArmory and about to pull a weapon to blast you.
+		you're running down the central corridor to the Weapons Armory whena Othon Jumps out,
+		 red scaly skin, dark grimy teeth, and evil clown costuflowing around his hate filled body.
+		  he's blocking the door to theArmory and about to pull a weapon to blast you.
 	""")
 
-	LASER_WEAPON_ARMORY= Room.new ("Laser Weapon Armory",
+	LASER_WEAPON_ARMORY= Room.new("Laser Weapon Armory",
 		"""
 		Lucky for you they made you learn Gothon insults in the academytell the one Othon joke you kt
 		Lhhe zbqure vf fb sng, jura fur tver nebhag qur ubhfr, fur fvaf nebhag gur ut
@@ -84,38 +88,45 @@ module Map
 		time.You won！
 		""")
 
-	ESCAPE_POD.add paths({
+	THE_END_LOSER=Room.new("The End",
+		"""You jump into a random pod and hit the eject button.
+		The pod escapes out into the void of space,then
+		implodes as the hul1 ruptures,crushing your body
+		into jam jelly.""")
+
+	ESCAPE_POD.add_paths({
 		'2'=>THE_END_WINNER,
-		'*'=>THE END LOSER})
+		'*'=>THE_END_LOSER})
 
 	GENERIC_DEATH=Room.new("death","You died.")
-		THE_BRIDGE.add paths({
-		'throw the bomb'=>GENERIC DEATH,
+	
+	THE_BRIDGE.add_paths({
+		'throw the bomb'=>GENERIC_DEATH,
 		'slowly place the bomb'=>ESCAPE_POD})
 
 	LASER_WEAPON_ARMORY.add_paths({
-		'0132'=>THE_BRIDGE，
-		'*'=>GENERIC DEATH})
+		'0132'=>THE_BRIDGE,
+		'*'=>GENERIC_DEATH})
 
 	CENTRAL_CORRIDOR.add_paths({
-		'shoot！'=>GENERIC DEATH,
+		'shoot！'=>GENERIC_DEATH,
 		'dodge!'=>GENERIC_DEATH,
 		'tel1 a joke'=>LASER_WEAPON_ARMORY})
 
-	START=CENTRAL CORRIDOR
+	START=CENTRAL_CORRIDOR
 
 	ROOM_NAMES={
-		'ENIAIL_COARINR'=> CRNTRL_CONRIO,
-		'LBSSR_NEAPOX AKGAYYD'=> LASER_KCAION_ANOR.
+		'CENTRAL_CORRIDOR'=> CENTRAL_CORRIDOR,
+		'LASER_WEAPON_ARMORY'=> LASER_WEAPON_ARMORY,
 		'THE_BRIDGE'=>THE_BRIDGE,
-		'ESCAPS_POD'=> ESCAPS_POD,
+		'ESCAPE_POD'=> ESCAPE_POD,
 		'THE_END_WINNER'=> THE_END_WINNER,
 		'THE_END_LOSER'=>THE_END_LOSER,
 		'START'=> START}
 
-	def MAP::load_roon(session)
+	def Map::load_room(session)
 		#Given a session this will return the right room or nil
-		return ROOM NAMES[session[:room]]
+		return ROOM_NAMES[session[:room]]
 	end
 	
 	def Map::save_room(session,room)
