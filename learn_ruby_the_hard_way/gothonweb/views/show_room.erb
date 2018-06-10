@@ -1,0 +1,13 @@
+<h1><8=room.name s></hi>
+<pre>
+<%=room.description %>
+</pre>
+<%if room.name=="death"|| room.name=="The End"%>
+<p><a href="/">Play Again?</a></p>
+<%else%>
+<p>
+<form action="/game"method="PosT">
+-<input type="text"name="action"><input type="SUBMIT">
+</form>
+</p>
+<%end %>
