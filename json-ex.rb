@@ -1,3 +1,5 @@
+#!/usr/bin/ruby
+
 require 'json'
 require 'pp'
 
@@ -11,6 +13,5 @@ obj = JSON.parse(json)  #转为hash  这里的json是字符串不是json对象
 pp obj
 
 
-#json = File.read('json.txt')
 obj = JSON.parse(s)  #转为hash  这里的json是字符串不是json对象
 pp obj
